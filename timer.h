@@ -1,7 +1,7 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include "try.h"
+#include <lace/try.h>
 #include <ctime>
 
 template <clockid_t TYPE>
