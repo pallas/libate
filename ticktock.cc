@@ -11,7 +11,7 @@ main(int argc, char* argv[]) {
   long d = 0;
   static const useconds_t delta = useconds_t(1e4);
 
-  timer_monotonic_coarse t;
+  late::timer_monotonic_coarse t;
   for (int i = 1 ; i < argc ; ++i) {
     char * ep;
     long v = strtol(argv[i], &ep, 0);
@@ -22,7 +22,7 @@ main(int argc, char* argv[]) {
     std::cout << int(t.elapsed()) << std::endl;
   }
 
-  std::cerr << timer_process().value() << std::endl;
+  std::cerr << late::timer_process().value() << std::endl;
   return EXIT_SUCCESS;
 }
 

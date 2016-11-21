@@ -1,8 +1,10 @@
-#ifndef TIMER_H
-#define TIMER_H
+#ifndef LATE__TIMER_H
+#define LATE__TIMER_H
 
 #include <lace/try.h>
 #include <ctime>
+
+namespace late {
 
 template <clockid_t TYPE>
 class timer {
@@ -62,4 +64,6 @@ typedef timer<CLOCK_THREAD_CPUTIME_ID> timer_thread_cputime_id;
 typedef timer_process_cputime_id timer_process;
 typedef timer_thread_cputime_id timer_thread;
 
-#endif//TIMER_H
+} // namespace late
+
+#endif//LATE__TIMER_H
