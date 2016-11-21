@@ -1,5 +1,8 @@
 default: all
 
+PROJECT := late
+PREFIX ?= /usr/local
+
 DEBUG ?= -g -ggdb -DDEBUG
 ifeq ($(DEBUG),)
 	override DEBUG := -DNDEBUG -O2
@@ -12,6 +15,8 @@ override CXXFLAGS += $(DEBUG) -MD -MP
 PROGRAMS := \
 	ticktock \
 	#
+
+HEADERS := $(wildcard *.h)
 
 TESTS := \
 	#
@@ -41,5 +46,10 @@ $(RUN_TESTS) : run/%: %
 .PHONY: clean
 clean:
 	rm -rf $(PROGRAMS) $(TESTS) $(OBJECTS) $(DEPENDS)
+
+.PHONY: install
+install: all
+	install -D -m 0644 -t $(PREFIX)/include/$(PROJECT) $(HEADERS)
+	install -D -m 0755 -t $(PREFIX)/bin $(PROGRAMS)
 
 #
