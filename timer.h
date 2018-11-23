@@ -3,6 +3,7 @@
 
 #include <lace/try.h>
 #include <ctime>
+#include <cmath>
 
 namespace late {
 
@@ -43,6 +44,11 @@ public:
   bool alarm(time_t sec, long nsec = 0) const {
     struct timespec t = { .tv_sec = sec, .tv_nsec = nsec };
     return timer::alarm(t);
+  }
+
+  bool alarm(double d) const {
+    double i, f = modf(d, &i);
+    return alarm(i, f * nsec_in_sec);
   }
 
   double value() const { return to_double(ts); }
