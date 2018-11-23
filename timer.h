@@ -13,6 +13,12 @@ public:
 
   void reset() { TRY(clock_gettime, TYPE, &ts); }
 
+  struct timespec resolution() const {
+    struct timespec e;
+    TRY(clock_getres, TYPE, &e);
+    return e;
+  }
+
   struct timespec delta() const {
     struct timespec e;
     TRY(clock_gettime, TYPE, &e);
