@@ -10,13 +10,20 @@ endif()
 
 project(libate)
 add_library(libate INTERFACE)
-add_executable(ticktock ticktock.cc)
 
-file(GLOB header_files "*.h")
-install(FILES ${header_files}
-	DESTINATION "include/late"
+set(${PROJECT_NAME}_EXECUTABLES
+	ticktock
 	)
 
-install(TARGETS ticktock
-	RUNTIME DESTINATION bin
+set(${PROJECT_NAME}_HEADERS
+	timer
 	)
+
+foreach(executable ${${PROJECT_NAME}_EXECUTABLES})
+	add_executable(${executable} ${executable}.cc)
+	install(TARGETS ${executable} RUNTIME DESTINATION bin)
+endforeach(executable)
+
+foreach(header ${${PROJECT_NAME}_HEADERS})
+	install(FILES ${header}.h DESTINATION "include/late")
+endforeach(header)
