@@ -65,11 +65,49 @@ private:
 };
 
 typedef timer<CLOCK_REALTIME> timer_realtime;
+
+#if defined(CLOCK_REALTIME_COARSE)
 typedef timer<CLOCK_REALTIME_COARSE> timer_realtime_coarse;
+#elif defined(CLOCK_REALTIME_FAST)
+typedef timer<CLOCK_REALTIME_FASE> timer_realtime_coarse
+#elif defined(CLOCK_REALTIME_PRECISE)
+typedef timer<CLOCK_REALTIME_PRECISE> timer_realtime_coarse
+#else
+typedef timer_realtime timer_realtime_coarse;
+#endif
+
 typedef timer<CLOCK_MONOTONIC> timer_monotonic;
+
+#if defined(CLOCK_MONOTONIC_COARSE)
 typedef timer<CLOCK_MONOTONIC_COARSE> timer_monotonic_coarse;
+#elif defined(CLOCK_MONOTONIC_FAST)
+typedef timer<CLOCK_MONOTONIC_FAST> timer_monotonic_coarse;
+#elif defined(CLOCK_MONOTONIC_PRECISE)
+typedef timer<CLOCK_MONOTONIC_PRECISE> timer_monotonic_coarse;
+#else
+typedef timer_monotonic timer_monotonic_coarse;
+#endif
+
+#if defined(CLOCK_MONOTONIC_RAW)
 typedef timer<CLOCK_MONOTONIC_RAW> timer_monotonic_raw;
+#elif defined(CLOCK_MONOTONIC_RAW_APPROX)
+typedef timer<_CLOCK_MONOTONIC_RAW> timer_monotonic_raw;
+#else
+typedef time_monotonic timer_monotonic_coarse;
+#endif
+
+#if defined(CLOCK_BOOTTIME)
 typedef timer<CLOCK_BOOTTIME> timer_boottime;
+#elif defined(CLOCK_UPTIME_RAW)
+typedef timer<CLOCK_UPTIME_RAW> timer_boottime;
+#elif defined(CLOCK_UPTIME_RAW_APPROX)
+typedef timer<CLOCK_UPTIME_RAW_APPROX> timer_boottime;
+#elif defined(CLOCK_UPTIME_FAST)
+typedef timer<CLOCK_UPTIME_FAST> timer_boottime;
+#elif defined(CLOCK_UPTIME_PRECISE)
+typedef timer<CLOCK_UPTIME_PRECISE> timer_boottime;
+#endif
+
 typedef timer<CLOCK_PROCESS_CPUTIME_ID> timer_process_cputime_id;
 typedef timer<CLOCK_THREAD_CPUTIME_ID> timer_thread_cputime_id;
 
